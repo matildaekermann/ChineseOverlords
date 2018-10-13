@@ -1,18 +1,21 @@
-
+package country;
 import java.util.Scanner;
 
 public class GlobalEconomyMain {
 	
 	private static final int REGISTER_COUNTRY = 1;
-	private static final int PRINT_COUNTRIES = 2;
-	private static final int PRINT_COUNTRY = 3;
-	private static final int INJECT_MONEY = 4;
-	private static final int PAY_DEBT = 5;
-	private static final int QUIT = 6;
-	private static final int EDIT_COUNTRY_INFORMATION =7;
+	private static final int REGISTER_CITY = 2;
+	private static final int PRINT_COUNTRIES = 3;
+	private static final int PRINT_COUNTRY = 4;
+	private static final int INJECT_MONEY = 5;
+	private static final int PAY_DEBT = 6;
+	private static final int QUIT = 7;
+	private static final int EDIT_COUNTRY_INFORMATION =8;
 		
 	private Country[] countries;
 	private int registeredCountries;
+
+
 	private Scanner input;
 	
 	
@@ -40,6 +43,8 @@ public class GlobalEconomyMain {
 		
 		return null;
 	}
+
+
 	
 	public Country createCountry() {		
 		
@@ -76,7 +81,13 @@ public class GlobalEconomyMain {
 				this.registeredCountries = this.registeredCountries + 1;
 				
 				break;
-	
+
+			case REGISTER_CITY:
+				registerCity();
+
+				break;
+
+
 			case PRINT_COUNTRIES:
 				printAllCountries();
 				break;
@@ -117,12 +128,13 @@ public class GlobalEconomyMain {
 		System.out.println(" Choose an option below: ");
 		System.out.println(" ");
 		System.out.println(" 1. Register a country. ");
-		System.out.println(" 2. Print all countries. ");
-		System.out.println(" 3. Print a country's information. ");
-		System.out.println(" 4. Inject money to a country. ");
-		System.out.println(" 5. Pay a country's debt. ");
-		System.out.println(" 6. Quit this program. ");
-		System.out.println(" 7. Edit a country's information. ");
+		System.out.println(" 2. Register a city");
+		System.out.println(" 3. Print all countries. ");
+		System.out.println(" 4. Print a country's information. ");
+		System.out.println(" 5. Inject money to a country. ");
+		System.out.println(" 6. Pay a country's debt. ");
+		System.out.println(" 7. Quit this program. ");
+		System.out.println(" 8. Edit a country's information. ");
 		System.out.println();
 	}
 	
@@ -147,7 +159,31 @@ public class GlobalEconomyMain {
 		
 	}
 	
-	
+
+	public void registerCity () {
+		System.out.print("Type what country you want to add a city to?");
+		String countryName = input.nextLine();
+		Country myCountry = retrieveCountry(countryName);
+		for (int i =0; i<countries.length; i++) {
+		 if(countries[i] != null) {
+
+			 System.out.print("What city would you like to add? ");
+			 String cityName = input.nextLine();
+
+			 myCountry.addCity(new City(cityName));
+			 break;
+
+		 }else {
+			 System.out.println("Sorry the country doesn't exist");
+		 }
+
+		}
+
+	}
+
+
+
+
 	/*
 	 * This method only reads a String that here, will be the name
 	 * of a country that you want to use 
